@@ -19,7 +19,6 @@ router.get("/:id", async (req, res, next) => {
   try {
     const product = await prisma.product.findUniqueOrThrow({
       where: { id: +id },
-      include: { product: includeProduct },
     });
     res.json(product);
   } catch (e) {

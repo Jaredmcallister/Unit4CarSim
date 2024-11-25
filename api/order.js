@@ -17,7 +17,7 @@ router.get("/", authenticate, async (req, res, next) => {
 });
 
 router.post("/", authenticate, async (req, res, next) => {
-  const { date, note, orderIds } = req.body;
+  const { date, note, productIds } = req.body;
   try {
     const products = productIds.map((id) => ({ id }));
     const order = await prisma.order.create({
@@ -35,7 +35,7 @@ router.post("/", authenticate, async (req, res, next) => {
         //   // items Product []
       },
     });
-    res.status(201).json(playlist);
+    res.status(201).json(order);
   } catch (e) {
     next(e);
   }
@@ -46,7 +46,7 @@ router.get("/:id", authenticate, async (req, res, next) => {
   try {
     const order = await prisma.order.findUniqueOrThrow({
       where: { id: +id },
-      include: { products: true },
+      include: { items: true },
     });
     if (order.ownerId !== req.user.id) {
       next({ status: 403, message: "This isn't your Order" });

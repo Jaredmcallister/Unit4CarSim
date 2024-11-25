@@ -18,6 +18,8 @@ router.use(async (req, res, next) => {
     const user = await prisma.user.findUniqueOrThrow({
       where: { id },
     });
+    req.user = user;
+    next();
   } catch (e) {
     next(e);
   }
