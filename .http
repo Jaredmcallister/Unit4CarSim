@@ -19,6 +19,10 @@ Content-Type: application/json
   "password": "passwordisthis"
 
 }
+### Make a new order
+POST {{host}}/orders
+Authorization: Bear {{token}}
+Content-Type: application/json
 
 ### Get all Orders
 @token = {{login.response.body.token}}
@@ -28,10 +32,6 @@ Authorization: Bearer {{token}}
 ### Get specific Order
 POST {{host}}/orders/1
 
-### Make a new order
-POST{{host}}/orders
-Authorization: Bear {{token}}
-Content-Type: application/json
 
 {
   "date": "random date",
@@ -40,7 +40,7 @@ Content-Type: application/json
 }
 
 ### Get all Products
-GET{{host}}products
+GET {{host}}products
 
 ### Get specific product
 GET {{host}}/products/17
